@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ItemCount = ({ nombre, stock, img, addToCartWidget }) => {
+const ItemCount = ({ nombre, stock, precio, img, addToCartWidget }) => {
 
   // El nombre, stock e img los voy levantando y recibiendo cuando recorro el array de productos (esto se debe reemplazar por un JSON o API)
   // La función addToCardWidget viene de ItemListContainer, suma la cantidad para agregar al carrito cuando apreto el botón, está declarada en Main
@@ -36,6 +36,7 @@ const ItemCount = ({ nombre, stock, img, addToCartWidget }) => {
           <div className="card-body">
             <h5 className="card-title">{nombre}</h5>
             <p className="card-text">Stock : {newStock}</p>
+            <p className="card-text">Precio : ${precio}</p>
             <div className="w-100 d-flex">
               <button onClick={()=>remove()} className="btn col-xs-6 btn-primary mx-auto">-</button>
               <span>Cantidad : {cantidad} </span>
