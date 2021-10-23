@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import ItemCount from "../ItemCount/ItemCount";
 
-const ItemDetail = ({ key, nombre, stock, precio, img, addToCartWidget }) => {
+const ItemCount = ({ nombre, stock, precio, img, addToCartWidget }) => {
 
   // El nombre, stock e img los voy levantando y recibiendo cuando recorro el array de productos (esto se debe reemplazar por un JSON o API)
   // La función addToCardWidget viene de ItemListContainer, suma la cantidad para agregar al carrito cuando apreto el botón, está declarada en Main
@@ -36,16 +35,17 @@ const ItemDetail = ({ key, nombre, stock, precio, img, addToCartWidget }) => {
           <img src={img} className="card-img-top h-100" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{nombre}</h5>
+            <p className="card-text">Stock : {newStock}</p>
             <p className="card-text">Precio : ${precio}</p>
             <div className="w-100 d-flex">
-              <button onClick={()=>(<ItemCount 
-                    key={key} 
-                    nombre={nombre}
-                    stock={stock}
-                    precio={precio}
-                    img={img}
-                    addToCartWidget={addToCartWidget}
-                />)} className="btn col-xs-6 btn-primary mx-auto">Ver Detalles</button>
+              <button onClick={()=>remove()} className="btn col-xs-6 btn-primary mx-auto">-</button>
+              <span>Cantidad : {cantidad} </span>
+              <button onClick={()=>add()} className="btn col-xs-6 btn-primary mx-auto">+</button>
+            </div>
+            <div className="row">
+              <button className="btn btn-primary my-3" onClick={()=>{
+                addToCartWidget(cantidad);
+                setCantidad(cantidad-cantidad);}}>Agregar al Pedido</button>
             </div>
           </div>
         </div>
@@ -53,4 +53,4 @@ const ItemDetail = ({ key, nombre, stock, precio, img, addToCartWidget }) => {
   );
 };
 
-export default ItemDetail;
+export default ItemCount;

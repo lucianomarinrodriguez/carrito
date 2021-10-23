@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react'
 import ItemCount from '../ItemCount/ItemCount'
-import ItemDetail from '../ItemDetail/ItemDetail';
 import { api } from '../../utils/api';
 
 const ItemListContainer = ({greeting,addToCartWidget}) => {
@@ -39,7 +38,7 @@ return (
         {/* recorro el array de productos y voy armando las cards */}
         <div className="row">
             {items.map((item => 
-                (<ItemDetail 
+                (<ItemCount 
                     key={item.id} 
                     nombre={item.name}
                     stock={parseInt(item.id) + 10}
