@@ -1,12 +1,40 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import {Link} from "react-router-dom";
 
-const ItemCount = ({ key, nombre, stock, precio, img, addToCartWidget }) => {
+const ItemCount = ({ addToCartWidget }) => {
 
-  // El nombre, stock e img los voy levantando y recibiendo cuando recorro el array de productos (esto se debe reemplazar por un JSON o API)
   // La función addToCardWidget viene de ItemListContainer, suma la cantidad para agregar al carrito cuando apreto el botón, está declarada en Main
+  const {id} = useParams()
+  // defini un state para guardar la info de cada producto
+  const [producto, setProducto] = useState(null);
 
+  // esta funcion hace la consulta dinamicamente por cada producto
+  const getIndividualProducto = async () => {
+    try {
+      // en la url estoy haciendo una peticion dinamica
+      const respuesta = await axios.get(
+        `hhttps://rickandmortyapi.com/api/character/${id}`
+      );
+      // guardo el resultado en el state producto
+      setProducto(respuesta.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    // llamo la funcion que me hace la consulta
+    getIndividualProducto();
+  }, []);
+
+  
   // El state muestra la cantidad de cada Articulo que voy a agregar al carrito 
-  const [cantidad , setCantidad] = useState(0)
+ const [cantidad , setCantidad] = useState(0)
+
+ const stock = parseInt(producto.id) + 10
+ //const newStock = stock
 
 
     // El state se usa para aumentar o disminuir el stock cuando se aumenta la cantidad o disminuye la cantidad
@@ -32,11 +60,11 @@ const ItemCount = ({ key, nombre, stock, precio, img, addToCartWidget }) => {
   return (
       <div className="col-sm-3 col-md-8 col-lg-3 col-xl-3 my-5">
         <div className="card bg-light h-100">
-          <img src={img} className="card-img-top h-100" alt="..." />
+          <img src={producto.image} className="card-img-top h-100" alt="..." />
           <div className="card-body">
-            <h5 className="card-title">{nombre}</h5>
+            <h5 className="card-title">{producto.name}</h5>
             <p className="card-text">Stock : {newStock}</p>
-            <p className="card-text">Precio : ${precio}</p>
+            <p className="card-text">Precio : ${parseInt(producto.id) * 114}</p>
             <div className="w-100 d-flex">
               <button onClick={()=>remove()} className="btn col-xs-6 btn-primary mx-auto">-</button>
               <span>Cantidad : {cantidad} </span>

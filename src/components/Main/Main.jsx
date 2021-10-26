@@ -1,7 +1,10 @@
 import React, { useState,useEffect } from 'react'
 import ItemListContainer from '../ItemListComtainer/ItemListContainer'
 import NavBar from '../NavBar/NavBar'
-import Loader from "react-loader-spinner"; 
+import Loader from "react-loader-spinner";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ItemCount from '../ItemCount/ItemCount';
+
 
 const Main = () => {
     
@@ -30,25 +33,32 @@ const Main = () => {
      }, [carrito])
 
     return (
-        <div className="container-fluid p-2">
-            <NavBar carrito={carrito} toggleMenu={toggleMenu} />
-            <a>
-            {
-                loading
-                ?
-                <Loader
-                    className="p-5"
-                    type="Puff"
-                    color="#00BFFF"
-                    height={100}
-                    width={100}
-                    timeout={3000} //3 secs
-                />
-                :
-                open && <ItemListContainer greeting="Bienvenidos a Mi Tienda" addToCartWidget={addToCartWidget}/>
-            }
-            </a>
-        </div>
+        <BrowserRouter>
+            <div className="container-fluid p-2">
+                <NavBar carrito={carrito} toggleMenu={toggleMenu} />
+                    <Switch>
+                        <a>
+                        {
+                            loading
+                            ?
+                            <Loader
+                                className="p-5"
+                                type="Puff"
+                                color="#00BFFF"
+                                height={100}
+                                width={100}
+                                timeout={3000} //3 secs
+                            />
+                            :
+                            open && <Route exact path="/"><ItemListContainer greeting="Bienvenidos a Mi Tienda" addToCartWidget={addToCartWidget}/></Route>
+                        }
+                        <Route exact path="/ItemCount/:id"> 
+                                <ItemCount/>
+                        </Route>
+                        </a>
+                    </Switch>
+            </div>
+        </BrowserRouter>
     )
 }
 

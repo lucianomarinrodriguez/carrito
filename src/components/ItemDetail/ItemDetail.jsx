@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ItemCount from "../ItemCount/ItemCount";
 
-const ItemDetail = ({ key, nombre, stock, precio, img, addToCartWidget }) => {
+const ItemDetail = ({ key, id, nombre, stock, precio, img, addToCartWidget }) => {
 
   // El nombre, stock e img los voy levantando y recibiendo cuando recorro el array de productos (esto se debe reemplazar por un JSON o API)
   // La función addToCardWidget viene de ItemListContainer, suma la cantidad para agregar al carrito cuando apreto el botón, está declarada en Main
@@ -36,7 +36,9 @@ const ItemDetail = ({ key, nombre, stock, precio, img, addToCartWidget }) => {
           <img src={img} className="card-img-top h-100" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{nombre}</h5>
+            <p className="card-text" hidden>ID : {id}</p>
             <p className="card-text">Precio : ${precio}</p>
+            <p className="card-text">Stock : {stock}</p>
             <div className="w-100 d-flex">
               <button onClick={()=>(<ItemCount 
                     key={key} 

@@ -34,7 +34,7 @@ const ItemDetail = ({ nombre, stock, precio, img, addToCartWidget }) => {
         <div className="card bg-light h-100">
           <img src={img} className="card-img-top h-100" alt="..." />
           <div className="card-body">
-            <h5 className="card-title">{nombre}</h5>
+            <p className="card-text">ID : {newStock}</p>
             <p className="card-text">Stock : {newStock}</p>
             <p className="card-text">Precio : ${precio}</p>
             <div className="w-100 d-flex">

@@ -41,6 +41,7 @@ return (
             {items.map((item => 
                 (<ItemDetail 
                     key={item.id} 
+                    id={item.id}
                     nombre={item.name}
                     stock={parseInt(item.id) + 10}
                     precio={parseInt(item.id) * 114}
