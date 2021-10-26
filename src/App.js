@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import cartContextProvider from './Context/cartContext';
+import CartContextProvider from './Context/cartContext';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,11 +10,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <cartContextProvider>
+    <CartContextProvider>
       <div className="App">
         <Main/>
       </div>
-    </cartContextProvider>
+    </CartContextProvider>
   );
 }
 

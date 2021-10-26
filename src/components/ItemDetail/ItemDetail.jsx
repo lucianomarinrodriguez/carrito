@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ItemCount from "../ItemCount/ItemCount";
+import { Link } from "react-router-dom";
 
 const ItemDetail = ({ key, id, nombre, stock, precio, img, addToCartWidget }) => {
 
@@ -38,16 +39,9 @@ const ItemDetail = ({ key, id, nombre, stock, precio, img, addToCartWidget }) =>
             <h5 className="card-title">{nombre}</h5>
             <p className="card-text" hidden>ID : {id}</p>
             <p className="card-text">Precio : ${precio}</p>
-            <p className="card-text">Stock : {stock}</p>
+            <p className="card-text" hidden>Stock : {stock}</p>
             <div className="w-100 d-flex">
-              <button onClick={()=>(<ItemCount 
-                    key={key} 
-                    nombre={nombre}
-                    stock={stock}
-                    precio={precio}
-                    img={img}
-                    addToCartWidget={addToCartWidget}
-                />)} className="btn col-xs-6 btn-primary mx-auto">Ver Detalles</button>
+              <Link to={`/ItemCount/${id}`} className="btn col-xs-6 btn-primary mx-auto">Ver Detalles</Link>
             </div>
           </div>
         </div>

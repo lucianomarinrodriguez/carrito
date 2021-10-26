@@ -2,11 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import {Link} from "react-router-dom";
+import { useCartContext } from "../../Context/cartContext";
+
 
 const ItemCount = ({ addToCartWidget }) => {
 
   // La función addToCardWidget viene de ItemListContainer, suma la cantidad para agregar al carrito cuando apreto el botón, está declarada en Main
   const {id} = useParams()
+  const {agregarItem} = useCartContext()
+  console.log(id)
   // defini un state para guardar la info de cada producto
   const [producto, setProducto] = useState(null);
 
@@ -15,7 +19,7 @@ const ItemCount = ({ addToCartWidget }) => {
     try {
       // en la url estoy haciendo una peticion dinamica
       const respuesta = await axios.get(
-        `hhttps://rickandmortyapi.com/api/character/${id}`
+        `https://rickandmortyapi.com/api/character/${id}`
       );
       // guardo el resultado en el state producto
       setProducto(respuesta.data);
@@ -33,7 +37,7 @@ const ItemCount = ({ addToCartWidget }) => {
   // El state muestra la cantidad de cada Articulo que voy a agregar al carrito 
  const [cantidad , setCantidad] = useState(0)
 
- const stock = parseInt(producto.id) + 10
+ const stock = parseInt(id) + 10
  //const newStock = stock
 
 
@@ -58,13 +62,13 @@ const ItemCount = ({ addToCartWidget }) => {
   }
 
   return (
-      <div className="col-sm-3 col-md-8 col-lg-3 col-xl-3 my-5">
-        <div className="card bg-light h-100">
-          <img src={producto.image} className="card-img-top h-100" alt="..." />
+      <div className="col-sm-3 col-md-8 col-lg-3 col-xl-3 my-5 container-fluid">
+        <div id="tarjeta" className="card bg-light h-100" >
+          <img src={producto&&producto.image} className="card-img-top h-100" alt="..." />
           <div className="card-body">
-            <h5 className="card-title">{producto.name}</h5>
+            <h5 className="card-title">{producto&&producto.name}</h5>
             <p className="card-text">Stock : {newStock}</p>
-            <p className="card-text">Precio : ${parseInt(producto.id) * 114}</p>
+            <p className="card-text">Precio : ${parseInt(producto&&producto.id) * 114}</p>
             <div className="w-100 d-flex">
               <button onClick={()=>remove()} className="btn col-xs-6 btn-primary mx-auto">-</button>
               <span>Cantidad : {cantidad} </span>
@@ -72,8 +76,9 @@ const ItemCount = ({ addToCartWidget }) => {
             </div>
             <div className="row">
               <button className="btn btn-primary my-3" onClick={()=>{
-                addToCartWidget(cantidad);
+                agregarItem(producto);
                 setCantidad(cantidad-cantidad);}}>Agregar al Pedido</button>
+              <Link to={`/`} className="btn btn-primary my-3">Seguir Comprando</Link>
             </div>
           </div>
         </div>
