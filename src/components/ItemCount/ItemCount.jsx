@@ -10,7 +10,8 @@ const ItemCount = ({ addToCartWidget }) => {
   // La función addToCardWidget viene de ItemListContainer, suma la cantidad para agregar al carrito cuando apreto el botón, está declarada en Main
   const {id} = useParams()
   const {agregarItem} = useCartContext()
-  console.log(id)
+  const {actCarrito} = useCartContext()
+  console.log("El ID es: ",id)
   // defini un state para guardar la info de cada producto
   const [producto, setProducto] = useState(null);
 
@@ -76,6 +77,8 @@ const ItemCount = ({ addToCartWidget }) => {
             </div>
             <div className="row">
               <button className="btn btn-primary my-3" onClick={()=>{
+                console.log("Cantidad: ",cantidad);
+                actCarrito(cantidad);
                 agregarItem(producto);
                 setCantidad(cantidad-cantidad);}}>Agregar al Pedido</button>
               <Link to={`/`} className="btn btn-primary my-3">Seguir Comprando</Link>
