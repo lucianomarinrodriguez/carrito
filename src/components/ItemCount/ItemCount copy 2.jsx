@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import {Link} from "react-router-dom";
 import { useCartContext } from "../../Context/cartContext";
-import { getFirestore } from '../../Services/getFirebase';
 
 
 const ItemCount = ({ addToCartWidget }) => {
@@ -14,34 +13,37 @@ const ItemCount = ({ addToCartWidget }) => {
   const {actCarrito} = useCartContext()
   console.log("El ID es: ",id)
   // defini un state para guardar la info de cada producto
-  const [producto, setProducto] = useState({});
-  const [newStock , setNewStock] = useState(0)
+  const [producto, setProducto] = useState(null);
 
-
+  // esta funcion hace la consulta dinamicamente por cada producto
+  const getIndividualProducto = async () => {
+    try {
+      // en la url estoy haciendo una peticion dinamica
+      const respuesta = await axios.get(
+        `https://rickandmortyapi.com/api/character/${id}`
+      );
+      // guardo el resultado en el state producto
+      setProducto(respuesta.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const db = getFirestore()
-    db.collection('productos').doc(id).get()
-    .then(resp => setProducto( {id: resp.id, ...resp.data()} ))
-    setNewStock(parseInt(producto.stock))
-}, [])
+    // llamo la funcion que me hace la consulta
+    getIndividualProducto();
+  }, []);
 
- // El state se usa para aumentar o disminuir el stock cuando se aumenta la cantidad o disminuye la cantidad
- const prod = parseInt(producto.stock) 
- console.log("Esto es prod.log: ", prod)
- const stock = parseInt(prod)
- 
-
- 
+  
   // El state muestra la cantidad de cada Articulo que voy a agregar al carrito 
  const [cantidad , setCantidad] = useState(0)
 
- 
+ const stock = parseInt(id) + 10
  //const newStock = stock
 
 
-   
-    
+    // El state se usa para aumentar o disminuir el stock cuando se aumenta la cantidad o disminuye la cantidad
+    const [newStock , setNewStock] = useState(stock)
 
 
   // Esta funcion solo vive en cada ItemCount y aumenta la cantidad de cada producto cuando tenga stock
@@ -66,12 +68,11 @@ const ItemCount = ({ addToCartWidget }) => {
           <img src={producto&&producto.image} className="card-img-top h-100" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{producto&&producto.name}</h5>
-            <p className="card-text">{producto&&producto.description}</p>
-            <p className="card-text">Stock: {newStock}</p>
-            <p className="card-text">Precio: ${producto&&producto.price}</p>
+            <p className="card-text">Stock : {newStock}</p>
+            <p className="card-text">Precio : ${parseInt(producto&&producto.id) * 114}</p>
             <div className="w-100 d-flex">
               <button onClick={()=>remove()} className="btn col-xs-6 btn-primary mx-auto">-</button>
-              <span>Cantidad: {cantidad} </span>
+              <span>Cantidad : {cantidad} </span>
               <button onClick={()=>add()} className="btn col-xs-6 btn-primary mx-auto">+</button>
             </div>
             <div className="row">

@@ -1,38 +1,23 @@
 import React, { useState,useEffect } from 'react'
 import ItemDetail from '../ItemDetail/ItemDetail';
 import { api } from '../../utils/api';
-import { getFirestore } from '../../Services/getFirebase';
 
 const ItemListContainer = ({greeting,addToCartWidget}) => {
 
-// Declaro la función de Firestore
-
-//const db = getFirestore()
-//console.log("Soy DB:",db)
-
-// Declaro la conexión a la API
+    // addToCartWidget lo voy pasando para agregar el contador
 
 const endpoint = '/character/';
 const [productos, setProductos] = useState([])
-const [producto, setProducto] = useState({})
 
-//Llamo a la API o a Firestore según lo que decida
 useEffect(() => {
-    const db = getFirestore()
-    db.collection('productos').get()
-    .then(resp => setProductos( resp.docs.map(prod => ( {id: prod.id, ...prod.data()} )) ))
-
-    db.collection('producto').doc('1nJ4gHHvVYoZqu1Vdia3').get()
-    .then(resp2 => setProducto( {id: resp2.id, ...resp2.data()} ))
-    //api.get(endpoint)
-    //    .then(response => {
-    //        const { data } = response
-    //        setProductos(data.results)
-    //        console.log(productos)
-    //    })
+    api.get(endpoint)
+        .then(response => {
+            const { data } = response
+            setProductos(data.results)
+            console.log(productos)
+        })
 }, [endpoint])
-
-console.log("Esto es producto: ",producto)
+  
 const items = productos //[
       
     //{ id : 0 , nombre :"Iphone 13", stock:10, img :"https://cnnespanol.cnn.com/wp-content/uploads/2021/09/Apple_iphone13_colors_09142021.jpg"},
@@ -57,8 +42,8 @@ return (
                     key={item.id} 
                     id={item.id}
                     nombre={item.name}
-                    stock={item.stock}
-                    precio={item.price}
+                    stock={parseInt(item.id) + 10}
+                    precio={parseInt(item.id) * 114}
                     img={item.image}
                     addToCartWidget={addToCartWidget}
                 /> ) 
