@@ -18,13 +18,16 @@ const ItemCount = ({ addToCartWidget }) => {
   const [newStock , setNewStock] = useState(0)
 
 
-
-  useEffect(() => {
-    const db = getFirestore()
-    db.collection('productos').doc(id).get()
-    .then(resp => setProducto( {id: resp.id, ...resp.data()} ))
-    setNewStock(parseInt(producto.stock))
+useEffect(() => {
+  const db = getFirestore()
+  db.collection('productos').doc(id).get()
+  .then(resp => setProducto( {id: resp.id, ...resp.data()}))
 }, [])
+
+useEffect(() => {
+  if(producto) setNewStock(producto.stock)
+},[producto])
+
 
  // El state se usa para aumentar o disminuir el stock cuando se aumenta la cantidad o disminuye la cantidad
  const prod = parseInt(producto.stock) 
