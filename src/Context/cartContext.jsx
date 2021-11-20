@@ -15,12 +15,24 @@ function CartContextProvider({children}){
         setCantCarrito (cantCarrito+cantidad)
         console.log("agrego al carrito", cantCarrito)
       }
+    //Función para calcular el precio total del carrito (pxq)
+    const pxq = () => {
+        return cartList.reduce((contador, valor)=>(contador + (valor.cantidad * valor.item.price)), 0) 
+    }
 
     //Función para agregar producto al carrito
-    const agregarItem=(item)=>{
-        setCartList([...cartList, item])
-        console.log(cartList)
-    }
+    const agregarItem = (item, cantidad) => {
+        const index = cartList.findIndex(i => i.item.id === item.id)
+          if (index > -1) {
+            const cantVieja = cartList[index].cantidad
+            cartList.splice(index, 1)
+            setCartList([...cartList, { item, cantidad: cantidad + cantVieja}])
+          }
+          else {
+            setCartList([...cartList, {item, cantidad}])
+            
+          }
+      }
 
     //Función para vaciar el carrito
     function vaciarCart(){
@@ -41,6 +53,7 @@ function CartContextProvider({children}){
         <cartContext.Provider value={{
             cartList,
             cantCarrito,
+            pxq,
             agregarItem,
             vaciarCart,
             borrarItem,

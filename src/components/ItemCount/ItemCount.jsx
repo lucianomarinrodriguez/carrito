@@ -25,9 +25,10 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
-  if(producto) setNewStock(producto.stock)
+  if(producto) setNewStock(producto.stock-1)
 },[producto])
 
+console.log("El producto es: ", producto)
 
  // El state se usa para aumentar o disminuir el stock cuando se aumenta la cantidad o disminuye la cantidad
  const prod = parseInt(producto.stock) 
@@ -37,7 +38,7 @@ useEffect(() => {
 
  
   // El state muestra la cantidad de cada Articulo que voy a agregar al carrito 
- const [cantidad , setCantidad] = useState(0)
+ const [cantidad , setCantidad] = useState(1)
 
  
  //const newStock = stock
@@ -49,7 +50,7 @@ useEffect(() => {
 
   // Esta funcion solo vive en cada ItemCount y aumenta la cantidad de cada producto cuando tenga stock
   function add() {
-    if(cantidad < stock & newStock > 0) {
+    if(cantidad <= stock & newStock > 0) {
       setCantidad(cantidad+1)
       setNewStock(newStock-1)
     }
@@ -57,7 +58,7 @@ useEffect(() => {
 
   // Esta funcion solo vive en cada ItemCount y resta la cantidad de cada producto hasta llegar a 1
   function remove() {
-    if( cantidad > 0) {
+    if( cantidad > 1) {
       setCantidad(cantidad - 1)
       setNewStock(newStock+1)
     }
@@ -65,6 +66,7 @@ useEffect(() => {
 
   return (
       <div className="col-sm-3 col-md-8 col-lg-3 col-xl-3 my-5 container-fluid">
+        <h2>{producto.name}</h2>
         <div id="tarjeta" className="card bg-light h-100" >
           <img src={producto&&producto.image} className="card-img-top h-100" alt="..." />
           <div className="card-body">
@@ -81,9 +83,10 @@ useEffect(() => {
               <button className="btn btn-primary my-3" onClick={()=>{
                 console.log("Cantidad: ",cantidad);
                 actCarrito(cantidad);
-                agregarItem(producto);
+                agregarItem(producto, cantidad);
                 setCantidad(cantidad-cantidad);}}>Agregar al Pedido</button>
               <Link to={`/`} className="btn btn-primary my-3">Seguir Comprando</Link>
+              <Link to={`/CartListContainer/`} className="btn btn-primary my-3">Ver Carrito</Link>
             </div>
           </div>
         </div>

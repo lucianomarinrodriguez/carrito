@@ -4,6 +4,9 @@ import NavBar from '../NavBar/NavBar'
 import Loader from "react-loader-spinner";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ItemCount from '../ItemCount/ItemCount';
+import CartListContainer from '../CartListContainer/CartListContainer';
+import CartView from '../CartView/CartView';
+import CheckOut from '../CheckOut/CheckOut';
 
 
 const Main = () => {
@@ -51,10 +54,17 @@ const Main = () => {
                             />
                             :
                             open && <Route exact path="/"><ItemListContainer greeting="Bienvenidos a Mi Tienda" addToCartWidget={addToCartWidget}/></Route>
+
                         }
+                        <Route exact path="/categorias/:categorias">
+                            <ItemListContainer greeting="Productos por categoria"/>
+                        </Route>
                         <Route exact path="/ItemCount/:id"> 
                                 <ItemCount/>
                         </Route>
+                        <Route exact path="/CartListContainer/"><CartListContainer/></Route>
+                        <Route exact path="/CartView/"><CartView/></Route>
+                        <Route exact path="/CheckOut/"><CheckOut/></Route>
                         </a>
                     </Switch>
             </div>

@@ -37,9 +37,9 @@ const ItemDetail = ({ key, id, nombre, stock, precio, img, addToCartWidget }) =>
           <img src={img} className="card-img-top h-100" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{nombre}</h5>
-            <p className="card-text" hidden>ID : {id}</p>
+            <p className="card-text" hidden>ID: {id}</p>
             <p className="card-text">Precio: US${precio}</p>
-            <p className="card-text" hidden>Stock : {stock}</p>
+            <p className="card-text" hidden>Stock: {stock}</p>
             <div className="w-100 d-flex">
               <Link to={`/ItemCount/${id}`} className="btn col-xs-6 btn-primary mx-auto">Ver Detalles</Link>
             </div>

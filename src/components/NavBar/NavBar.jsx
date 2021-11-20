@@ -15,20 +15,23 @@ const NavBar = ({carrito,toggleMenu}) => {
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="#">Home</a>
+                        <Link to="/" className="nav-link active" aria-current="page" href="#">Home</Link>
                         </li>
                         <li className="nav-item">
-                        <a className="nav-link active" href="#">Cocina</a>
+                        <Link to="/categorias/consolas" className="nav-link active" href="#">Consolas</Link>
                         </li>
                         <li className="nav-item">
-                        <a className="nav-link active" href="#">Electrodomésticos</a>
+                        <Link to="/categorias/computacion" className="nav-link active" href="#">Computación</Link>
+                        </li>
+                        <li className="nav-item">
+                        <Link to="/categorias/televisores" className="nav-link active" href="#">Televisores</Link>
                         </li>
                         <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tecnología</a>
+                        <a className="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Apple</a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a className="dropdown-item" href="#">Computación</a></li>
-                            <li><a className="dropdown-item" href="#">Celulares y Tablets</a></li>
-                            <li><a className="dropdown-item" href="#">Gaming</a></li>
+                            <li><Link to="/categorias/telefonos" className="dropdown-item" href="#">Teléfonos</Link></li>
+                            <li><Link to="/categorias/tablets" className="dropdown-item" href="#">Tablets</Link></li>
+                            <li><Link to="/categorias/relojes" className="dropdown-item" href="#">Relojes</Link></li>
                         </ul>
                         </li>
                     </ul>
