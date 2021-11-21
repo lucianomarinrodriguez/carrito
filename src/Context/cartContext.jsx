@@ -13,7 +13,6 @@ function CartContextProvider({children}){
     //Función para incrementar la etiqueta de cantidad de productos del carrito
     const actCarrito = (cantidad) => {
         setCantCarrito (cantCarrito+cantidad)
-        console.log("agrego al carrito", cantCarrito)
       }
     //Función para calcular el precio total del carrito (pxq)
     const pxq = () => {
@@ -30,7 +29,7 @@ function CartContextProvider({children}){
           }
           else {
             setCartList([...cartList, {item, cantidad}])
-            
+
           }
       }
 

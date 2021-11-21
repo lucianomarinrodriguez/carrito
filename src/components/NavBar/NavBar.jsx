@@ -3,7 +3,7 @@ import CartWidget from '../CartWidget/CartWidget'
 import "./NavBar.css"
 import { Link } from 'react-router-dom'
 
-const NavBar = ({carrito,toggleMenu}) => {
+const NavBar = () => {
     return (
         <div>
             <nav id="navbar" className="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,7 +36,7 @@ const NavBar = ({carrito,toggleMenu}) => {
                         </li>
                     </ul>
                     </div>
-                    <CartWidget toggleMenu={toggleMenu} carrito={carrito}/>
+                    <CartWidget/>
                 </div>
             </nav>
         </div>

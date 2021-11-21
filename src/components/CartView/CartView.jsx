@@ -1,9 +1,7 @@
 import { useCartContext } from "../../Context/cartContext";
-import { useParams } from "react-router";
-import {Link} from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-const CartView = ({ key, id, nombre, stock, precio, img, cantidad, total }) => {
+const CartView = ({ key, id, nombre, precio, img, cantidad, total }) => {
 
     const {borrarItem} = useCartContext()
 

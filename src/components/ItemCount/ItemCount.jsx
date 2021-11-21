@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import {Link} from "react-router-dom";
@@ -6,13 +5,12 @@ import { useCartContext } from "../../Context/cartContext";
 import { getFirestore } from '../../Services/getFirebase';
 
 
-const ItemCount = ({ addToCartWidget }) => {
+const ItemCount = () => {
 
-  // La función addToCardWidget viene de ItemListContainer, suma la cantidad para agregar al carrito cuando apreto el botón, está declarada en Main
   const {id} = useParams()
   const {agregarItem} = useCartContext()
   const {actCarrito} = useCartContext()
-  console.log("El ID es: ",id)
+  
   // defini un state para guardar la info de cada producto
   const [producto, setProducto] = useState({});
   const [newStock , setNewStock] = useState(0)
@@ -22,30 +20,20 @@ useEffect(() => {
   const db = getFirestore()
   db.collection('productos').doc(id).get()
   .then(resp => setProducto( {id: resp.id, ...resp.data()}))
-}, [])
+}, [id])
 
 useEffect(() => {
   if(producto) setNewStock(producto.stock-1)
 },[producto])
 
-console.log("El producto es: ", producto)
 
- // El state se usa para aumentar o disminuir el stock cuando se aumenta la cantidad o disminuye la cantidad
+ // El state se usa para aumentar o disminuir el stock cuando se aumenta o disminuye la cantidad
  const prod = parseInt(producto.stock) 
- console.log("Esto es prod.log: ", prod)
  const stock = parseInt(prod)
  
 
- 
   // El state muestra la cantidad de cada Articulo que voy a agregar al carrito 
  const [cantidad , setCantidad] = useState(1)
-
- 
- //const newStock = stock
-
-
-   
-    
 
 
   // Esta funcion solo vive en cada ItemCount y aumenta la cantidad de cada producto cuando tenga stock
@@ -81,7 +69,6 @@ console.log("El producto es: ", producto)
             </div>
             <div className="row">
               <button className="btn btn-primary my-3" onClick={()=>{
-                console.log("Cantidad: ",cantidad);
                 actCarrito(cantidad);
                 agregarItem(producto, cantidad);
                 setCantidad(cantidad-cantidad);}}>Agregar al Pedido</button>

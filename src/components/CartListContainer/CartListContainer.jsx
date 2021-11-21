@@ -1,10 +1,7 @@
-import React, { useState,useEffect } from 'react'
-
+import React from 'react'
 import {Link} from "react-router-dom";
 import { useCartContext } from "../../Context/cartContext";
-import { getFirestore } from '../../Services/getFirebase';
 import CartView from '../CartView/CartView';
-import CheckOut from '../CheckOut/CheckOut';
 
 const CartListContainer = () => {
 
@@ -28,7 +25,6 @@ const CartListContainer = () => {
                             key={prod.item.id} 
                             id={prod.item.id}
                             nombre={prod.item.name}
-                            stock={prod.item.stock}
                             precio={prod.item.price}
                             img={prod.item.image}
                             cantidad={prod.cantidad}
