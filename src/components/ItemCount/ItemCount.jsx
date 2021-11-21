@@ -69,9 +69,10 @@ useEffect(() => {
             </div>
             <div className="row">
               <button className="btn btn-primary my-3" onClick={()=>{
+                if(cantidad > 0){
                 actCarrito(cantidad);
                 agregarItem(producto, cantidad);
-                setCantidad(cantidad-cantidad);}}>Agregar al Pedido</button>
+                setCantidad(cantidad-cantidad);}else{alert("La cantidad a comprar no puede ser 0")}}}>Agregar al Pedido</button>
               <Link to={`/`} className="btn btn-primary my-3">Seguir Comprando</Link>
               <Link to={`/CartListContainer/`} className="btn btn-primary my-3">Ver Carrito</Link>
             </div>

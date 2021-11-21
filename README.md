@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# E-commerce MI TIENDA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto fue desarrollado para la entrega final del curso de React de CoderHouse como parte de la carrera de Desarrollador Full Stack.
 
-## Available Scripts
+Fue creado utilizando [Create React App](https://github.com/facebook/create-react-app).
 
-In the project directory, you can run:
+## Comenzando 🚀
 
-### `npm start`
+_Estas instrucciones, te permitirán obtener una copia funcional del proyecto en tu computadora local, con propósitos de desarrollo, pruebas e investigación._
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+En la siguiente **[Demo](https://mitienda-coderhouse.netlify.app)** podrás probar y ver la aplicación en funcionamiento.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Si deseas descargar el proyecto, puedes realizarlo desde el siguiente *[repo](https://github.com/lucianomarinrodriguez/carrito)* y posteriormente utilizar el archivo zip obtenido. Otra posibilidad es descargarlo mediante [git clone](https://github.com/lucianomarinrodriguez/carrito.git).
+Una vez descargado y descomprimido el archivo con el proyecto, se deberá correr el comando `npm install`, esto permitirá instalar las dependencias necesarias para el correcto funcionamiento de la aplicación.
+Finalmente, con el comando `npm run start`, se ejecutrá la aplicación en un servidor local.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Pre-requisitos 📋
 
-### `npm run build`
+_Que se necesita para instalar el software_
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+* _Editor de codigo (Visual Studio Code, Atom, Sublime Text)_
+* [Node.js](https://nodejs.org/es/)
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Construido con 🛠️
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* [Axios _^0.23.0_](https://axios-http.com/) - Libreria que permite realizar operaciones como cliente HTTP
+* [Bootstrap _v ^5.1.1_ / React Bootstrap _v ^2.0.0-rc.0_](https://getbootstrap.com/) - Frameworks CSS utilizados para dar estilos a la aplicación
+* [Firebase _v ^8.9.1_](https://firebase.google.com/) - Proveedor de base de datos
+* [React Loader Spinner _v ^4.0.0_](https://www.npmjs.com/package/react-loader-spinner) - Librería que brinda animaciones para la carga y espera
 
-### `npm run eject`
+## Autor ✒️
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* **Luciano Marin Rodriguez** - *Desarrollo completo* - [Lucho Marin](https://github.com/lucianomarinrodriguez)
