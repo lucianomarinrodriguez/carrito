@@ -12,23 +12,14 @@ const changeLoad = () => setloading(true);
 
 //Llamo a Firestore y controlo si traigo una categoria o muestro todos los productos
 const showItems = async () => {
-    if (categorias) {
-        try {
-            const db = getFirestore()
-            db.collection('productos').where('category', '==', categorias).get()
-            .then(resp => setProductos( resp.docs.map(prod => ( {id: prod.id, ...prod.data()} )) ))
-        } catch (error) {
-            console.log(error);
-        }  
-      } else {
-        try {
-            const db = getFirestore()
-            db.collection('productos').get()
-            .then(resp => setProductos( resp.docs.map(prod => ( {id: prod.id, ...prod.data()} )) ))
-        } catch (error) {
-            console.log(error);
-            }
-        }
+    const db = getFirestore()
+    const collectionQuery = categorias ?
+            db.collection('productos').where('category', '==', categorias)
+        :
+            db.collection('productos')
+    collectionQuery.get()
+    .then(resp => setProductos( resp.docs.map(prod => ( {id: prod.id, ...prod.data()} )) ))
+    .catch(error => console.log(error))
     setTimeout(changeLoad, 2000)
     }
 

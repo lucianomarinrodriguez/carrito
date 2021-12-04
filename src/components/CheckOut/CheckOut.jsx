@@ -1,11 +1,66 @@
 import React from 'react';
 import { useCartContext } from "../../Context/cartContext";
 import { useHistory } from "react-router-dom";
+import firebase from 'firebase';
+import { getFirestore } from '../../Services/getFirebase';
+
 
 const CheckOut = () => {
     
-    const {vaciarCart} = useCartContext()
+    const {vaciarCart,cartList,pxq} = useCartContext()
     const history = useHistory()
+
+    //Preparo el pedido, inserto en Firebase y actualizo stock de los productos
+    const comprar = (nombre, email) => {
+        let pedido = {};
+        pedido.date = firebase.firestore.Timestamp.fromDate(new Date());
+        pedido.name = nombre;
+        pedido.email = email;
+        pedido.total = pxq();
+        pedido.items = cartList.map(cartItem => {
+          const id = cartItem.item.id;
+          const item = cartItem.item.name;
+          const price = (cartItem.item.price * cartItem.cantidad);
+          const quantity = cartItem.cantidad;
+    
+          return {id, item, price, quantity}
+        })
+        
+        const dbPedido = getFirestore();
+        
+        const pedidoReady = dbPedido.collection('pedidos')
+        pedidoReady.add(pedido)
+        .then((IdDocumento)=>{
+            alert(`Su pedido ${IdDocumento.id} se procesó correctamente, a la brevedad será contactado por email. Gracias por su compra`)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+        .finally(()=>{
+          vaciarCart();
+          history.push('/')
+        })
+        
+    
+        const updateProductos = dbPedido.collection('productos').where(firebase.firestore.FieldPath.documentId(), 'in', cartList.map(i => i.item.id));
+    
+        const batch = dbPedido.batch();
+    
+        updateProductos.get()
+        .then(collection => {
+          collection.docs.forEach(docSnapshot => {
+            batch.update(docSnapshot.ref, {
+              stock: docSnapshot.data().stock - cartList.find(it => it.item.id === docSnapshot.id).cantidad
+            })
+          })
+          batch.commit().then(resp => {
+            console.log('modificado');
+          })
+          .catch(er => {
+            console.log(er);
+          })
+        })
+      }
 
 
     // Escucha el submit del form y valida los campos
@@ -14,9 +69,7 @@ const CheckOut = () => {
         if(e.target.elements.nombre.value.length > 5){
             if(e.target.elements.direccion.value.length > 5){
                 if(e.target.elements.email.value === e.target.elements.email2.value){
-                    vaciarCart()
-                    alert("Gracias por su compra, a la brevedad será contactado por email")
-                    history.push('/')
+                    comprar(e.target.elements.nombre.value, e.target.elements.email.value)
                 } else{
                     alert("Las direcciones de email deben ser iguales")
                 }
